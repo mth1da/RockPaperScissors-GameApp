@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -125,6 +127,46 @@ public class StepAppOpenHelper extends SQLiteOpenHelper {
         // 6. Return the map with hours and number of steps
         return map;
     }
+
+    public static Map<String, Integer> loadStepsByDay(Context context, String date){
+        // Define a map to store the day and number of steps as key-value pairs
+        Map<String, Integer>  stepsByDay = new HashMap<>();
+
+        // Get the readable database
+        StepAppOpenHelper databaseHelper = new StepAppOpenHelper(context);
+        SQLiteDatabase database = databaseHelper.getReadableDatabase();
+
+        // Define the query to get the data
+        Cursor cursor = database.rawQuery("SELECT day, COUNT(*) FROM num_steps GROUP BY day ORDER BY day ASC LIMIT 7", null);
+
+        // Iterate over returned elements on the cursor
+        cursor.moveToFirst();
+        for (int index=0; index < cursor.getCount(); index++){
+            String tmpKey = cursor.getString(0);
+            Integer tmpValue = Integer.parseInt(cursor.getString(1));
+
+            //Put the data from the database into the map
+            stepsByDay.put(tmpKey, tmpValue);
+
+            cursor.moveToNext();
+        }
+
+        // Close the cursor and database
+        cursor.close();
+        database.close();
+
+        // Return the map with hours and number of steps
+        return stepsByDay;
+    }
+
+
+    /*
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String endDate = dateFormat.format(calendar.getTime());
+        calendar.add(Calendar.DAY_OF_WEEK, -6); // Go back 6 days to start from the beginning of the week
+        String startDate = dateFormat.format(calendar.getTime());
+        */
 
 
     @Override

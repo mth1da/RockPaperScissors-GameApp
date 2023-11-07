@@ -11,7 +11,11 @@
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/baseline_stacked_bar_chart_24"
-            android:title="@string/menu_report" />
+            android:title="Hourly Report" />
+        <item
+            android:id="@+id/nav_day"
+            android:icon="@drawable/baseline_stacked_bar_chart_24"
+            android:title="Daily Report" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/baseline_person_pin_24"
