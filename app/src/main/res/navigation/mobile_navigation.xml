@@ -11,6 +11,53 @@
         android:label="@string/menu_steps"
         tools:layout="@layout/fragment_home" />
 
+        <action
+            android:id="@+id/action_homeFragment_to_gameFragment"
+            app:destination="@id/nav_game" />
+
+    <fragment
+        android:id="@+id/nav_game"
+        android:name="com.example.stepappv4.ui.Game.GameFragment"
+        android:label="@string/menu_steps"
+        tools:layout="@layout/activity_00_game" />
+
+        <action
+            android:id="@+id/action_gameFragment_to_matching"
+            app:destination="@id/nav_matching" />
+
+        <action
+            android:id="@+id/action_gameFragment_to_history"
+            app:destination="@id/nav_history" />
+
+        <action
+            android:id="@+id/action_gameFragment_to_rematching"
+            app:destination="@id/nav_rematching" />
+
+    <fragment
+        android:id="@+id/nav_matching"
+        android:name="com.example.stepappv4.ui.Game.Game_01_Matching"
+        android:label="Matching"
+        tools:layout="@layout/activity_01_matching" />
+
+
+    <fragment
+        android:id="@+id/nav_rematching"
+        android:name="com.example.stepappv4.ui.Game.Game_07_RematchSelect"
+        android:label="Matching"
+        tools:layout="@layout/activity_07_rematchselect" />
+        <action
+            android:id="@+id/action_rematchFragment_to_home"
+            app:destination="@id/nav_home" />
+
+    <fragment
+        android:id="@+id/nav_history"
+        android:name="com.example.stepappv4.ui.Game.Game_08_History"
+        android:label="History"
+        tools:layout="@layout/activity_08_history" />
+        <action
+            android:id="@+id/action_historyFragment_to_home"
+            app:destination="@id/nav_home" />
+
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.example.stepappv4.ui.Report.ReportFragment"

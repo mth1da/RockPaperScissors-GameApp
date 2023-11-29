@@ -13,12 +13,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.stepappv4.StepAppOpenHelper;
 import com.example.stepappv4.R;
@@ -32,7 +34,7 @@ import java.util.TimeZone;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private FragmentHomeBinding binding;
 
@@ -48,7 +50,6 @@ public class HomeFragment extends Fragment {
     private StepCounterListener sensorListener;
 
     private Sensor stepDetectorSensor;
-
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -74,6 +75,9 @@ public class HomeFragment extends Fragment {
         StepAppOpenHelper databaseOpenHelper = new StepAppOpenHelper(this.getContext());
         SQLiteDatabase database = databaseOpenHelper.getWritableDatabase();
 
+
+        Button gameLauncherBtn = (Button) root.findViewById(R.id.game_launcher_button);
+        gameLauncherBtn.setOnClickListener(this);
 
 
         toggleButtonGroup = (MaterialButtonToggleGroup) root.findViewById(R.id.toggleButtonGroup);
@@ -110,6 +114,20 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    @Override
+    public void onClick(View view) {
+
+        if (view.getId() == R.id.game_launcher_button) {
+            Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_gameFragment);
+        } /*else if (view.getId() == R.id.button_start) {
+            counter = 0;
+            stepsCountView.setText(Integer.toString(counter));
+            progressBar.setProgress(counter);
+        }*/
+
+    }
+
 }
 
 class  StepCounterListener implements SensorEventListener{
@@ -232,6 +250,5 @@ class  StepCounterListener implements SensorEventListener{
             }
         }
     }
-
 
 }

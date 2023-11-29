@@ -1,4 +1,50 @@
 package com.example.stepappv4.ui.Game;
 
-public class GameFragment {
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+
+import com.example.stepappv4.ui.Home.HomeViewModel;
+import com.example.stepappv4.R;
+
+public class GameFragment extends Fragment implements View.OnClickListener{
+
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+
+        // Inflate the layout for this fragment
+        View root = inflater.inflate(R.layout.activity_00_game, container, false);
+
+        Button btn = (Button) root.findViewById(R.id.game_init);
+        btn.setOnClickListener(this);
+
+        Button historyBtn = (Button) root.findViewById(R.id.history_button);
+        historyBtn.setOnClickListener(this);
+
+        Button rematchBtn = (Button) root.findViewById(R.id.rematch_init);
+        rematchBtn.setOnClickListener(this);
+
+        return root;
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        if (view.getId() == R.id.game_init) {
+            Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_matching);
+        } else if (view.getId() == R.id.history_button) {
+            Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_history);
+        } else if (view.getId() == R.id.rematch_init) {
+            Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_rematching);
+        }
+
+    }
+
 }
