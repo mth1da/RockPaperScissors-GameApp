@@ -31,6 +31,9 @@ public class GameFragment extends Fragment implements View.OnClickListener{
         Button rematchBtn = (Button) root.findViewById(R.id.rematch_init);
         rematchBtn.setOnClickListener(this);
 
+        Button loginBtn = (Button) root.findViewById(R.id.login_button);
+        loginBtn.setOnClickListener(this);
+
         return root;
     }
 
@@ -43,6 +46,8 @@ public class GameFragment extends Fragment implements View.OnClickListener{
             Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_history);
         } else if (view.getId() == R.id.rematch_init) {
             Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_rematching);
+        } else if (view.getId() == R.id.login_button) {
+            Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_login);
         }
 
     }

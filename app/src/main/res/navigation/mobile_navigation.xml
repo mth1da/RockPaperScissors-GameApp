@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.stepappv4.ui.Home.HomeFragment"
-        android:label="@string/menu_steps"
+        android:label="Home"
         tools:layout="@layout/fragment_home" />
 
         <action
@@ -16,9 +16,15 @@
             app:destination="@id/nav_game" />
 
     <fragment
+        android:id="@+id/nav_login"
+        android:name="com.example.stepappv4.ui.Security.LoginActivity"
+        android:label="Login"
+        tools:layout="@layout/activity_login" />
+
+    <fragment
         android:id="@+id/nav_game"
         android:name="com.example.stepappv4.ui.Game.GameFragment"
-        android:label="@string/menu_steps"
+        android:label="Game"
         tools:layout="@layout/activity_00_game" />
 
         <action
@@ -32,6 +38,10 @@
         <action
             android:id="@+id/action_gameFragment_to_rematching"
             app:destination="@id/nav_rematching" />
+
+        <action
+            android:id="@+id/action_gameFragment_to_login"
+            app:destination="@id/nav_login" />
 
     <fragment
         android:id="@+id/nav_matching"
