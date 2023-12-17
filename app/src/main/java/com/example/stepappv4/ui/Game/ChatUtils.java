@@ -263,13 +263,16 @@ public class ChatUtils {
             byte[] buffer = new byte[1024];
             int bytes;
 
-            while (true) {
+            boolean tester = true;
+
+            while (tester) {
                 try {
                     bytes = inputStream.read(buffer);
 
                     handler.obtainMessage(Game_01_Matching.MESSAGE_READ, bytes, -1, buffer).sendToTarget();
                 } catch (IOException e) {
                     connectionLost();
+                    tester = false;
                 }
             }
         }
@@ -298,8 +301,7 @@ public class ChatUtils {
         bundle.putString(Game_01_Matching.TOAST, "Connection Lost");
         message.setData(bundle);
         handler.sendMessage(message);
-
-        ChatUtils.this.start();
+        ChatUtils.this.stop();
     }
 
     private synchronized void connectionFailed() {

@@ -134,6 +134,7 @@ public class Game_01_Matching extends AppCompatActivity {
                         case ChatUtils.STATE_NONE:
                             setState("Not Connected");
                             hideActionBtns();
+                            btnPlay.setVisibility(View.VISIBLE);
                             break;
                         case ChatUtils.STATE_LISTEN:
                             setState("Listening...");
@@ -244,7 +245,6 @@ public class Game_01_Matching extends AppCompatActivity {
     }
 
     private void setState(CharSequence subTitle) {
-        //getSupportActionBar().setSubtitle(subTitle);
         getSupportActionBar().setTitle(subTitle);
     }
 
@@ -257,7 +257,6 @@ public class Game_01_Matching extends AppCompatActivity {
         setContentView(R.layout.activity_01_matching);
 
         context = this;
-        Toast.makeText(context, "TEST", Toast.LENGTH_SHORT).show();
         //myText = root.findViewById(R.id.myTextView);
         myText = findViewById(R.id.myTextView);
         //oppText = root.findViewById(R.id.oppTextView);
@@ -270,11 +269,9 @@ public class Game_01_Matching extends AppCompatActivity {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        //initializeText(root);
         initializeText();
         chatUtils = new ChatUtils(context, handler);
         hideActionBtns();
-        //return root;
     }
 
     private void initializeText() {
