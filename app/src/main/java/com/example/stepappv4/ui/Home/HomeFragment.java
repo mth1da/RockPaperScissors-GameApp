@@ -23,7 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.stepappv4.StepAppOpenHelper;
+import com.example.stepappv4.DatabaseHelper;
 import com.example.stepappv4.R;
 import com.example.stepappv4.databinding.FragmentHomeBinding;
 import com.example.stepappv4.ui.Game.Game_01_Matching;
@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         stepDetectorSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
 
-        StepAppOpenHelper databaseOpenHelper = new StepAppOpenHelper(this.getContext());
+        DatabaseHelper databaseOpenHelper = new DatabaseHelper(this.getContext());
         SQLiteDatabase database = databaseOpenHelper.getWritableDatabase();
 
 
@@ -129,4 +129,3 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     }
 
 }
-

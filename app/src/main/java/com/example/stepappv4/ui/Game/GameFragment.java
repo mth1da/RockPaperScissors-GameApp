@@ -16,6 +16,7 @@ import androidx.navigation.Navigation;
 
 import com.example.stepappv4.ui.Home.HomeViewModel;
 import com.example.stepappv4.R;
+import com.example.stepappv4.ui.Security.LoginActivity;
 
 public class GameFragment extends Fragment implements View.OnClickListener{
 
@@ -52,7 +53,11 @@ public class GameFragment extends Fragment implements View.OnClickListener{
         } else if (view.getId() == R.id.rematch_init) {
             Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_rematching);
         } else if (view.getId() == R.id.login_button) {
-            Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_login);
+            Intent intent = new Intent(requireActivity(), LoginActivity.class);
+            startActivity(intent);
+            //startActivity(new Intent(getActivity(), LoginActivity.class));
+            //((Activity) getActivity()).overridePendingTransition(0, 0);
+            //Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_login);
         }
 
     }
