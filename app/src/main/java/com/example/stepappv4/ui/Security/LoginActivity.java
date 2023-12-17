@@ -53,4 +53,36 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void moveToMainActivity() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void checkSession() {
+        //check if user is logged in
+        //if user is logged in --> move to mainActivity
+
+        SessionManager sessionManager = new SessionManager(LoginActivity.this);
+        int userID = sessionManager.getSession();
+
+        if(userID != -1){
+            //user id logged in and so move to mainActivity
+            moveToMainActivity();
+        }
+        else{
+            //do nothing
+        }
+    }
+
+    public void login() {
+        // login and save session
+        //User user = new User(12,"Ankit");
+        SessionManager sessionManagement = new SessionManager(LoginActivity.this);
+        sessionManagement.saveSession();
+
+        //2. step
+        moveToMainActivity();
+    }
 }
