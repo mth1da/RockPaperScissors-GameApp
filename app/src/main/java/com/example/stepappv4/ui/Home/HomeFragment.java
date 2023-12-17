@@ -117,7 +117,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-
         if (view.getId() == R.id.game_launcher_button) {
             Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_gameFragment);
         } /*else if (view.getId() == R.id.button_start) {
