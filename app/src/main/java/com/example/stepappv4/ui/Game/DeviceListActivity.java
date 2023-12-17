@@ -14,9 +14,11 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -32,6 +34,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.stepappv4.R;
+
 import java.util.Set;
 
 public class DeviceListActivity extends AppCompatActivity {
@@ -45,7 +49,10 @@ public class DeviceListActivity extends AppCompatActivity {
     //private final int REQUEST_BLUETOOTH_PERMISSION = 1000;
 
     @Override
+    //public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     protected void onCreate(Bundle savedInstanceState) {
+        //View root = inflater.inflate(R.layout.activity_01_matching, container, false);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_list);
         context = this;
@@ -54,6 +61,7 @@ public class DeviceListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         init();
+        //return null;
     }
 
     private void init() {

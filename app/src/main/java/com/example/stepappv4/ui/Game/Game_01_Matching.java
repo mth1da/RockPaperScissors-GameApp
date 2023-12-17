@@ -22,6 +22,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +43,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -58,7 +58,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.stepappv4.R;
 
-public class Game_01_Matching extends Fragment {
+//public class Game_01_Matching extends Fragment {
+public class Game_01_Matching extends AppCompatActivity {
     private Context context;
     private BluetoothAdapter bluetoothAdapter;
     private LocationManager locationManager;
@@ -174,6 +175,7 @@ public class Game_01_Matching extends Fragment {
         }
     });
 
+    //private void updateOutcome(View root, TextView myText, TextView oppText) {
     private void updateOutcome(TextView myText, TextView oppText) {
         TextView output = findViewById(R.id.decision);
 
@@ -247,26 +249,36 @@ public class Game_01_Matching extends Fragment {
     }
 
     @Override
+    //public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     public void onCreate(Bundle savedInstanceState) {
+        //View root = inflater.inflate(R.layout.activity_01_matching, container, false);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_01_matching);
 
         context = this;
+        Toast.makeText(context, "TEST", Toast.LENGTH_SHORT).show();
+        //myText = root.findViewById(R.id.myTextView);
         myText = findViewById(R.id.myTextView);
+        //oppText = root.findViewById(R.id.oppTextView);
         oppText = findViewById(R.id.oppTextView);
 
+        //Toolbar toolbar = root.findViewById(R.id.toolbar);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+        //initializeText(root);
         initializeText();
         chatUtils = new ChatUtils(context, handler);
         hideActionBtns();
+        //return root;
     }
 
     private void initializeText() {
+    //private void initializeText(View root) {
         listMainChat = findViewById(R.id.list_conversation);
         edCreateMessage = findViewById(R.id.ed_enter_message);
         btnSendMessage = findViewById(R.id.btn_send_msg);
@@ -363,7 +375,7 @@ public class Game_01_Matching extends Fragment {
             Toast.makeText(context, "No bluetooth found", Toast.LENGTH_SHORT).show();
         } else {
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN, Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.ACCESS_FINE_LOCATION}, BLUETOOTH_PERMISSION_REQUEST);
+                ActivityCompat.requestPermissions(Game_01_Matching.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN, Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.ACCESS_FINE_LOCATION}, BLUETOOTH_PERMISSION_REQUEST);
             } else {
                 // We purposefully fail this connection attempt in the beginning because otherwise we would have to fail a connection attempt manually.
                 // We could not figure out why but this seems to do the job.
@@ -390,7 +402,7 @@ public class Game_01_Matching extends Fragment {
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         if (chatUtils != null) {
             chatUtils.stop();

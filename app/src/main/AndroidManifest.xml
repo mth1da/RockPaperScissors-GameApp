@@ -36,10 +36,8 @@
             android:label="@string/title_activity_signup"
             android:theme="@style/Theme.StepAppV5" />
         <activity
-            android:name=".ui.Game.GameFragment"
-            android:exported="false"
-            android:label="@string/title_activity_activity00_game"
-            android:theme="@style/Theme.StepAppV5" />
+            android:name=".ui.Game.Game_01_Matching"
+            android:exported="true"/>
         <activity
             android:name=".ui.Game.DeviceListActivity"
             android:exported="true">

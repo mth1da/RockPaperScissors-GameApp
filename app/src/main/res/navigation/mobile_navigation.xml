@@ -43,7 +43,7 @@
             android:id="@+id/action_gameFragment_to_login"
             app:destination="@id/nav_login" />
 
-    <fragment
+    <activity
         android:id="@+id/nav_matching"
         android:name="com.example.stepappv4.ui.Game.Game_01_Matching"
         android:label="Matching"

@@ -1,5 +1,6 @@
 package com.example.stepappv4.ui.Game;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -41,7 +44,9 @@ public class GameFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
 
         if (view.getId() == R.id.game_init) {
-            Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_matching);
+            Intent intent = new Intent(requireActivity(), Game_01_Matching.class);
+            startActivity(intent);
+            //Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_matching);
         } else if (view.getId() == R.id.history_button) {
             Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_history);
         } else if (view.getId() == R.id.rematch_init) {

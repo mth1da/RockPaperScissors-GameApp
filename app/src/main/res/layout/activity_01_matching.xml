@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.stepappv4.Game.Game_01_Matching">
+    tools:context="com.example.stepappv4.ui.Game.Game_01_Matching">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
