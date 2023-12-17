@@ -22,7 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.stepappv4.StepAppOpenHelper;
+import com.example.stepappv4.DatabaseHelper;
 import com.example.stepappv4.R;
 import com.example.stepappv4.databinding.FragmentHomeBinding;
 import com.google.android.material.button.MaterialButtonToggleGroup;
@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         stepDetectorSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
 
-        StepAppOpenHelper databaseOpenHelper = new StepAppOpenHelper(this.getContext());
+        DatabaseHelper databaseOpenHelper = new DatabaseHelper(this.getContext());
         SQLiteDatabase database = databaseOpenHelper.getWritableDatabase();
 
 
@@ -229,7 +229,7 @@ class  StepCounterListener implements SensorEventListener{
         List<String> timePointList = timestampsSeries.subList(lastAddedIndex,currentSize);
         lastAddedIndex = currentSize;
 
-        for (int i = 1; i < valuesInWindow.size()-1; i++) {
+        /*for (int i = 1; i < valuesInWindow.size()-1; i++) {
             int forwardSlope = valuesInWindow.get(i + 1) - valuesInWindow.get(i);
             int downwardSlope = valuesInWindow.get(i) - valuesInWindow.get(i - 1);
 
@@ -240,15 +240,15 @@ class  StepCounterListener implements SensorEventListener{
                 progressBar.setProgress(accStepCounter);
 
                 ContentValues databaseEntry = new ContentValues();
-                databaseEntry.put(StepAppOpenHelper.KEY_TIMESTAMP, timePointList.get(i));
+                databaseEntry.put(DatabaseHelper.KEY_TIMESTAMP, timePointList.get(i));
 
-                databaseEntry.put(StepAppOpenHelper.KEY_DAY, this.day);
-                databaseEntry.put(StepAppOpenHelper.KEY_HOUR, this.hour);
+                databaseEntry.put(DatabaseHelper.KEY_DAY, this.day);
+                databaseEntry.put(DatabaseHelper.KEY_HOUR, this.hour);
 
-                database.insert(StepAppOpenHelper.TABLE_NAME, null, databaseEntry);
+                database.insert(DatabaseHelper.TABLE_NAME, null, databaseEntry);
 
             }
-        }
+        }*/
     }
 
 }

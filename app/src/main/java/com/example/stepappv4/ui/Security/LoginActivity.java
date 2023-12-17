@@ -8,8 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.stepappv4.MainActivity;
-import com.example.stepappv4.R;
-import com.example.stepappv4.database.DatabaseHelper;
+import com.example.stepappv4.DatabaseHelper;
 import com.example.stepappv4.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
@@ -19,12 +18,12 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_login);
 
+        super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         databaseHelper = new DatabaseHelper(this);
+
 
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,14 +45,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        binding.signupRedirectText.setOnClickListener(new View.OnClickListener() {
+        binding.signupRedirectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(intent);
             }
         });
-
-
     }
 }

@@ -2,24 +2,15 @@ package com.example.stepappv4.ui.Security;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.example.stepappv4.database.DatabaseHelper;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.core.view.WindowCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.stepappv4.databinding.ActivityLoginBinding;
 import com.example.stepappv4.databinding.ActivitySignupBinding;
-
 import com.example.stepappv4.R;
+import com.example.stepappv4.DatabaseHelper;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -29,8 +20,10 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        binding = ActivitySignupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        //setContentView(R.layout.activity_login);
+        //setContentView(binding.getRoot());
         databaseHelper = new DatabaseHelper(this);
 
         binding.signupButton.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +57,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-        binding.loginRedirectText.setOnClickListener(new View.OnClickListener() {
+        binding.loginRedirectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
