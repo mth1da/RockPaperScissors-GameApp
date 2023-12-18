@@ -257,12 +257,9 @@ public class Game_01_Matching extends AppCompatActivity {
         setContentView(R.layout.activity_01_matching);
 
         context = this;
-        //myText = root.findViewById(R.id.myTextView);
         myText = findViewById(R.id.myTextView);
-        //oppText = root.findViewById(R.id.oppTextView);
         oppText = findViewById(R.id.oppTextView);
 
-        //Toolbar toolbar = root.findViewById(R.id.toolbar);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
