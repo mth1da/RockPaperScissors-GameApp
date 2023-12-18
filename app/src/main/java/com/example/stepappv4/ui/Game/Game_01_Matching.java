@@ -63,6 +63,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.stepappv4.MainActivity;
 import com.example.stepappv4.R;
 import com.example.stepappv4.ui.Home.HomeFragment;
 import com.example.stepappv4.ui.Home.StepCounterListener;
@@ -120,6 +121,11 @@ public class Game_01_Matching extends AppCompatActivity {
     private TableLayout table;
     private TextView position;
     private TextView steps;
+    private Button home;
+    private TextView custom_title;
+    private TextView hasChosen;
+    private TextView oppHasChosen;
+    private TextView oppName;
 
     private final ActivityResultLauncher<Intent> deviceListLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -151,15 +157,16 @@ public class Game_01_Matching extends AppCompatActivity {
                             btnPlay.setVisibility(View.VISIBLE);
                             break;
                         case ChatUtils.STATE_LISTEN:
-                            setState("Listening...");
+                            setState("Listening For Devices...");
                             break;
                         case ChatUtils.STATE_CONNECTING:
-                            setState("Connecting...");
+                            setState("Connecting To Device...");
                             break;
                         case ChatUtils.STATE_CONNECTED:
-                            setState("Connected: " + connectedDevice);
+                            setState("Connected To: " + connectedDevice);
                             showPlayBtns();
                             btnPlay.setVisibility(View.GONE);
+                            oppName.setText(connectedDevice + ":");
                             break;
                     }
                     break;
@@ -175,6 +182,7 @@ public class Game_01_Matching extends AppCompatActivity {
                     String inputBuffer = new String(buffer, 0, message.arg1);
                     adapterMainChat.add(connectedDevice + ": " + inputBuffer);
                     oppText.setText(inputBuffer);
+                    oppHasChosen.setVisibility(View.VISIBLE);
                     //updateOutcome(myText, oppText);
                     break;
                 case MESSAGE_DEVICE_NAME:
@@ -201,31 +209,31 @@ public class Game_01_Matching extends AppCompatActivity {
         String b = oppText.getText().toString();
 
         if (a.equals("Rock") && b.equals("Rock")) {
-            output.setText("DRAW");
+            output.setText("It's a DRAW!");
         }
         if (a.equals("Rock") && b.equals("Paper")) {
-            output.setText("LOSS");
+            output.setText("You LOST,\nBetter Luck Next Time!");
         }
         if (a.equals("Rock") && b.equals("Scissors")) {
-            output.setText("WIN");
+            output.setText("Victory Royale!");
         }
         if (a.equals("Paper") && b.equals("Rock")) {
-            output.setText("WIN");
+            output.setText("Victory Royale!");
         }
         if (a.equals("Paper") && b.equals("Paper")) {
-            output.setText("DRAW");
+            output.setText("It's a DRAW!");
         }
         if (a.equals("Paper") && b.equals("Scissors")) {
-            output.setText("LOSS");
+            output.setText("You LOST,\nBetter Luck Next Time!");
         }
         if (a.equals("Scissors") && b.equals("Rock")) {
-            output.setText("LOSS");
+            output.setText("You LOST,\nBetter Luck Next Time!");
         }
         if (a.equals("Scissors") && b.equals("Paper")) {
-            output.setText("WIN");
+            output.setText("Victory Royale!");
         }
         if (a.equals("Scissors") && b.equals("Scissors")) {
-            output.setText("DRAW");
+            output.setText("It's a DRAW!");
         }
     }
 
@@ -262,7 +270,8 @@ public class Game_01_Matching extends AppCompatActivity {
     }
 
     private void setState(CharSequence subTitle) {
-        getSupportActionBar().setTitle(subTitle);
+        custom_title.setText(subTitle);
+        custom_title.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -277,6 +286,8 @@ public class Game_01_Matching extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().hide();
+        custom_title = findViewById(R.id.custom_title);
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -295,6 +306,8 @@ public class Game_01_Matching extends AppCompatActivity {
         Toast.makeText(context, "Shaken, not stirred!", Toast.LENGTH_SHORT).show();
         updateOutcome(myText, oppText);
         showResult();
+        hasChosen.setVisibility(View.GONE);
+        oppHasChosen.setVisibility(View.GONE);
         btnReplay.setVisibility(View.VISIBLE);
         btnCompare.setVisibility(View.GONE);
         stepManager.unregisterListener(stepListener);
@@ -313,9 +326,21 @@ public class Game_01_Matching extends AppCompatActivity {
         table = findViewById(R.id.table);
         decision = findViewById(R.id.decision);
         position = findViewById(R.id.position);
+        home = findViewById(R.id.game_to_home);
+        hasChosen = findViewById(R.id.hasChosen);
+        oppHasChosen = findViewById(R.id.oppHasChosen);
+        oppName = findViewById(R.id.oppName);
 
         adapterMainChat = new ArrayAdapter<String>(context, R.layout.message_layout);
         listMainChat.setAdapter(adapterMainChat);
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Game_01_Matching.this, HomeFragment.class);
+                startActivity(intent);
+            }
+        });
 
         btnSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -336,6 +361,7 @@ public class Game_01_Matching extends AppCompatActivity {
                 chatUtils.write(message.getBytes());
                 showCompBtn();
                 hidePlayBtns();
+                hasChosen.setVisibility(View.VISIBLE);
                 if (accSensor != null) {
                     stepManager.registerListener(stepListener, accSensor, SensorManager.SENSOR_DELAY_NORMAL);
                 }
@@ -350,6 +376,7 @@ public class Game_01_Matching extends AppCompatActivity {
                 chatUtils.write(message.getBytes());
                 showCompBtn();
                 hidePlayBtns();
+                hasChosen.setVisibility(View.VISIBLE);
                 if (accSensor != null) {
                     stepManager.registerListener(stepListener, accSensor, SensorManager.SENSOR_DELAY_NORMAL);
                 }
@@ -364,6 +391,7 @@ public class Game_01_Matching extends AppCompatActivity {
                 chatUtils.write(message.getBytes());
                 showCompBtn();
                 hidePlayBtns();
+                hasChosen.setVisibility(View.VISIBLE);
                 if (accSensor != null) {
                     stepManager.registerListener(stepListener, accSensor, SensorManager.SENSOR_DELAY_NORMAL);
                 }
@@ -375,6 +403,8 @@ public class Game_01_Matching extends AppCompatActivity {
             public void onClick(View view) {
                 updateOutcome(myText, oppText);
                 showResult();
+                hasChosen.setVisibility(View.GONE);
+                oppHasChosen.setVisibility(View.GONE);
                 btnReplay.setVisibility(View.VISIBLE);
                 btnCompare.setVisibility(View.GONE);
             }
@@ -427,6 +457,7 @@ public class Game_01_Matching extends AppCompatActivity {
                         Toast.makeText(context, "Contacting Satellites...", Toast.LENGTH_SHORT).show();
                         locationListener = new LocationListener() {
                             boolean hasDisplayedCoords = false;
+
                             @Override
                             public void onLocationChanged(@NonNull Location location) {
                                 double latitude = location.getLatitude();
@@ -438,16 +469,20 @@ public class Game_01_Matching extends AppCompatActivity {
                                     List addresses = geocoder.getFromLocation(latitude, longitude, 1);
                                     if (addresses.size() > 0) {
                                         Address address = (Address) addresses.get(0);
-                                        result.append(((Address) addresses.get(0)).getAddressLine(0)).append("\n");
-                                        result.append(address.getLocality()).append(", ").append(address.getCountryName());
+                                        result.append(((Address) addresses.get(0)).getAddressLine(0));
                                     }
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
                                 }
-                                position.setText(result);
+                                position.setVisibility(View.VISIBLE);
+                                position.setText("Current Location:\n" + result);
                                 if (!hasDisplayedCoords) {
                                     Toast.makeText(context, "Lat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_SHORT).show();
                                     hasDisplayedCoords = true;
+                                } else {
+                                    if (locationManager != null) {
+                                        locationManager.removeUpdates(locationListener);
+                                    }
                                 }
                             }
                         };
@@ -462,14 +497,17 @@ public class Game_01_Matching extends AppCompatActivity {
         }
     }
 
+
+    public void onBackPressed() {
+        Intent intent = new Intent(Game_01_Matching.this, HomeFragment.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (chatUtils != null) {
             chatUtils.stop();
-        }
-        if (locationManager != null) {
-            locationManager.removeUpdates(locationListener);
         }
         if (stepManager != null && stepListener != null) {
             stepManager.unregisterListener(stepListener);

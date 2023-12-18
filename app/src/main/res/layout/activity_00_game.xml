@@ -11,7 +11,14 @@
         android:id="@+id/game_init"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#DEEBF7"
+        android:fontFamily="@font/comic_neue"
         android:text="@string/play"
+        android:textAlignment="center"
+        android:textColor="#843C0C"
+        app:strokeColor="#843C0C"
+        android:textSize="16sp"
+        app:strokeWidth="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,24 +39,31 @@
         android:id="@+id/rematch_init"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#DEEBF7"
+        android:fontFamily="@font/comic_neue"
         android:text="Rematch"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        android:textAlignment="center"
+        android:textColor="#843C0C"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/game_init"
-        app:layout_constraintVertical_bias="0.417" />
+        app:strokeColor="#843C0C"
+        app:strokeWidth="2dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="407dp"
-        android:layout_height="51dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="679dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/history_button"
-            android:layout_width="94dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Match History" />
