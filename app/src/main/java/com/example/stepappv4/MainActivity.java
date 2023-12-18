@@ -1,17 +1,24 @@
 package com.example.stepappv4;
 
 import android.content.pm.PackageManager;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.view.View;
 import android.view.Menu;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.stepappv4.ui.Home.HomeFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -41,8 +48,10 @@ public class MainActivity extends AppCompatActivity {
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                DrawerLayout drawer = binding.drawerLayout;
+                if (!drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.openDrawer(GravityCompat.START);
+                }
             }
         });
         DrawerLayout drawer = binding.drawerLayout;
@@ -61,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
         if (runningOorLater) {
             getActivityPermission();
         }
+        CoordinatorLayout rootLayout = findViewById(R.id.app_bar_main); // Replace with your root layout ID
+        AnimationDrawable animDrawable = (AnimationDrawable) rootLayout.getBackground();
+        animDrawable.setEnterFadeDuration(3000);
+        animDrawable.setExitFadeDuration(3000);
+        animDrawable.start();
     }
 
     @Override
