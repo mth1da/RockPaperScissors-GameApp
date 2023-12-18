@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.stepappv4.R;
+import com.example.stepappv4.ui.Home.HomeFragment;
 
 import java.util.Set;
 
@@ -48,14 +50,12 @@ public class DeviceListActivity extends AppCompatActivity {
     private Context context;
     private BluetoothAdapter bluetoothAdapter;
     private ProgressBar progressScanDevices;
+    private Button btnScan;
 
     private final int REQUEST_LOCATION_PERMISSION = 1001;
-    //private final int REQUEST_BLUETOOTH_PERMISSION = 1000;
 
     @Override
-    //public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     protected void onCreate(Bundle savedInstanceState) {
-        //View root = inflater.inflate(R.layout.activity_01_matching, container, false);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_list);
@@ -63,9 +63,21 @@ public class DeviceListActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar_devices);
         setSupportActionBar(toolbar);
+        getSupportActionBar().hide();
 
         init();
-        //return null;
+
+        btnScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (btnScan.getText() == "Discovering devices...") {
+                    Toast.makeText(context, "You're already scanning!", Toast.LENGTH_SHORT).show();
+                } else {
+                    scanDevices();
+                }
+                btnScan.setText("Discovering devices...");
+            }
+        });
     }
 
     private void init() {
@@ -78,6 +90,8 @@ public class DeviceListActivity extends AppCompatActivity {
 
         listPairedDevices.setAdapter(adapterPairedDevices);
         listAvailableDevices.setAdapter(adapterAvailableDevices);
+
+        btnScan = findViewById(R.id.btn_scan);
 
         listAvailableDevices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -107,7 +121,12 @@ public class DeviceListActivity extends AppCompatActivity {
 
             if (pairedDevices != null && pairedDevices.size() > 0) {
                 for (BluetoothDevice device : pairedDevices) {
-                    adapterPairedDevices.add(device.getName() + "\n" + device.getAddress());
+                    //adapterPairedDevices.add(device.getName() + "\n" + device.getAddress());
+                    if (device.getName() != null) {
+                        adapterPairedDevices.add(device.getName());
+                    } else {
+                        adapterPairedDevices.add("null: " + device.getAddress());
+                    }
                 }
             }
 
@@ -184,15 +203,21 @@ public class DeviceListActivity extends AppCompatActivity {
                     return;
                 }
                 if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
-                    adapterAvailableDevices.add(device.getName() + "\n" + device.getAddress());
+                    //adapterAvailableDevices.add(device.getName() + "\n" + device.getAddress());
+                    if (device.getName() != null) {
+                        adapterAvailableDevices.add(device.getName());
+                    } else {
+                        adapterAvailableDevices.add("null: " + device.getAddress());
+                    }
                     adapterAvailableDevices.notifyDataSetChanged();
                 }
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                 progressScanDevices.setVisibility(View.GONE);
+                btnScan.setText("Start Scan");
                 if (adapterAvailableDevices.getCount() == 0) {
-                    Toast.makeText(context, "No new devices found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "No new devices found.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(context, "Click on the device to start the chat", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Start the game by clicking on a device.", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -217,8 +242,6 @@ public class DeviceListActivity extends AppCompatActivity {
     private void scanDevices() {
         progressScanDevices.setVisibility(View.VISIBLE);
         adapterAvailableDevices.clear();
-        Toast.makeText(context, "Scan started", Toast.LENGTH_SHORT).show();
-
         // TODO: BUG FIX - If Bluetooth is already enabled, then it doesn't show the paired devices or available devices.
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_SCAN}, 100);
@@ -226,10 +249,8 @@ public class DeviceListActivity extends AppCompatActivity {
             if (bluetoothAdapter.isDiscovering()) {
                 bluetoothAdapter.cancelDiscovery();
                 bluetoothAdapter.startDiscovery();
-                Toast.makeText(context, "Discovering...", Toast.LENGTH_SHORT).show();
             } else {
                 bluetoothAdapter.startDiscovery();
-                Toast.makeText(context, "Discovering...", Toast.LENGTH_SHORT).show();
             }
         }
     }
