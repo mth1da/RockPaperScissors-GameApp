@@ -121,12 +121,12 @@ public class DeviceListActivity extends AppCompatActivity {
 
             if (pairedDevices != null && pairedDevices.size() > 0) {
                 for (BluetoothDevice device : pairedDevices) {
-                    //adapterPairedDevices.add(device.getName() + "\n" + device.getAddress());
-                    if (device.getName() != null) {
-                        adapterPairedDevices.add(device.getName());
-                    } else {
-                        adapterPairedDevices.add("null: " + device.getAddress());
-                    }
+                    adapterPairedDevices.add(device.getName() + "\n" + device.getAddress());
+                    //if (device.getName() != null) {
+                    //    adapterPairedDevices.add(device.getName());
+                    //} else {
+                    //    adapterPairedDevices.add("null: " + device.getAddress());
+                    //}
                 }
             }
 
@@ -203,12 +203,12 @@ public class DeviceListActivity extends AppCompatActivity {
                     return;
                 }
                 if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
-                    //adapterAvailableDevices.add(device.getName() + "\n" + device.getAddress());
-                    if (device.getName() != null) {
-                        adapterAvailableDevices.add(device.getName());
-                    } else {
-                        adapterAvailableDevices.add("null: " + device.getAddress());
-                    }
+                    adapterAvailableDevices.add(device.getName() + "\n" + device.getAddress());
+                    //if (device.getName() != null) {
+                    //    adapterAvailableDevices.add(device.getName());
+                    //} else {
+                    //    adapterAvailableDevices.add("null: " + device.getAddress());
+                    //}
                     adapterAvailableDevices.notifyDataSetChanged();
                 }
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
