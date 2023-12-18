@@ -16,12 +16,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -58,11 +63,16 @@ import androidx.fragment.app.Fragment;
 
 import com.example.stepappv4.R;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 //public class Game_01_Matching extends Fragment {
 public class Game_01_Matching extends AppCompatActivity {
     private Context context;
     private BluetoothAdapter bluetoothAdapter;
     private LocationManager locationManager;
+    private LocationListener locationListener;
     private ChatUtils chatUtils;
     private final int BLUETOOTH_PERMISSION_REQUEST = 100;
     private final int LOCATION_PERMISSION_REQUEST = 101;
@@ -95,17 +105,7 @@ public class Game_01_Matching extends AppCompatActivity {
     private Button btnPlay;
     private Button btnReplay;
     private TableLayout table;
-
-    //private ActivityResultLauncher<Intent> enableBtLauncher = registerForActivityResult(
-    //        new ActivityResultContracts.StartActivityForResult(),
-    //        result -> {
-    //            if (result.getResultCode() == RESULT_OK) {
-    //                Toast.makeText(context, "Bluetooth enabled", Toast.LENGTH_SHORT).show();
-    //            } else {
-    //                Toast.makeText(context, "Bluetooth not enabled", Toast.LENGTH_SHORT).show();
-    //            }
-    //        }
-    //);
+    private TextView position;
 
     private final ActivityResultLauncher<Intent> deviceListLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -249,9 +249,7 @@ public class Game_01_Matching extends AppCompatActivity {
     }
 
     @Override
-    //public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     public void onCreate(Bundle savedInstanceState) {
-        //View root = inflater.inflate(R.layout.activity_01_matching, container, false);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_01_matching);
@@ -272,7 +270,6 @@ public class Game_01_Matching extends AppCompatActivity {
     }
 
     private void initializeText() {
-    //private void initializeText(View root) {
         listMainChat = findViewById(R.id.list_conversation);
         edCreateMessage = findViewById(R.id.ed_enter_message);
         btnSendMessage = findViewById(R.id.btn_send_msg);
@@ -284,6 +281,7 @@ public class Game_01_Matching extends AppCompatActivity {
         btnReplay = findViewById(R.id.btn_replay);
         table = findViewById(R.id.table);
         decision = findViewById(R.id.decision);
+        position = findViewById(R.id.position);
 
         adapterMainChat = new ArrayAdapter<String>(context, R.layout.message_layout);
         listMainChat.setAdapter(adapterMainChat);
@@ -385,6 +383,30 @@ public class Game_01_Matching extends AppCompatActivity {
                         startActivity(enableLocationIntent);
                     }
                     if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                        Toast.makeText(context, "Contacting Satellites...", Toast.LENGTH_SHORT).show();
+                        locationListener = new LocationListener() {
+                            @Override
+                            public void onLocationChanged(@NonNull Location location) {
+                                double latitude = location.getLatitude();
+                                double longitude = location.getLongitude();
+                                Toast.makeText(context, "Houston, we have location!", Toast.LENGTH_SHORT).show();
+                                StringBuilder result = new StringBuilder();
+                                try {
+                                    Geocoder geocoder = new Geocoder(Game_01_Matching.this, Locale.getDefault());
+                                    List addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                                    if (addresses.size() > 0) {
+                                        Address address = (Address) addresses.get(0);
+                                        result.append(((Address) addresses.get(0)).getAddressLine(0)).append("\n");
+                                        result.append(address.getLocality()).append(", ").append(address.getCountryName());
+                                    }
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                position.setText(result);
+                                Toast.makeText(context, "Lat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_SHORT).show();
+                            }
+                        };
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 1, locationListener);
                         if (bluetoothAdapter.getScanMode() == BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
                             Intent intent = new Intent(Game_01_Matching.this, DeviceListActivity.class);
                             deviceListLauncher.launch(intent);
@@ -401,17 +423,9 @@ public class Game_01_Matching extends AppCompatActivity {
         if (chatUtils != null) {
             chatUtils.stop();
         }
+        if (locationManager != null) {
+            locationManager.removeUpdates(locationListener);
+        }
     }
-
-    // OLD CODE START
-
-    //public View onCreateView(@NonNull LayoutInflater inflater,
-    //                         ViewGroup container, Bundle savedInstanceState) {
-
-    //    View root = inflater.inflate(R.layout.activity_01_matching, container, false);
-
-    //    return root;
-    //}
-    // OLD CODE END
 
 }
