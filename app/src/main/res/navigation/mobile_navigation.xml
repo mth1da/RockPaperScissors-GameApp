@@ -16,7 +16,10 @@
             app:destination="@id/nav_game">
         </action>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fa15202ef7ed730d92be97462c760ce389ff8144
     <!--
     <activity
         android:id="@+id/nav_login"

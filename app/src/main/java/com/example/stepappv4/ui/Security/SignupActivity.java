@@ -13,6 +13,7 @@ import com.example.stepappv4.R;
 import com.example.stepappv4.DatabaseHelper;
 import com.example.stepappv4.ui.Game.Game_01_Matching;
 
+
 public class SignupActivity extends AppCompatActivity {
 
     ActivitySignupBinding binding;

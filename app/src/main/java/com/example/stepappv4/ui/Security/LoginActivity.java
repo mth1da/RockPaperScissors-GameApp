@@ -91,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
         SessionManager sessionManagement = new SessionManager(LoginActivity.this);
         //sessionManagement.saveSession();
 
+
         //2. step
         moveToMainActivity();
     }
