@@ -11,6 +11,7 @@ import com.example.stepappv4.databinding.ActivityLoginBinding;
 import com.example.stepappv4.databinding.ActivitySignupBinding;
 import com.example.stepappv4.R;
 import com.example.stepappv4.DatabaseHelper;
+import com.example.stepappv4.ui.Game.Game_01_Matching;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -64,39 +65,13 @@ public class SignupActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
 
-    /*
-    private AppBarConfiguration appBarConfiguration;
-    private ActivitySignupBinding binding;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        binding = ActivitySignupBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        setSupportActionBar(binding.toolbar);
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_signup);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-        binding.fab.setOnClickListener(new View.OnClickListener() {
+        binding.toHomeRedirectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(SignupActivity.this, Game_01_Matching.class);
+                startActivity(intent);
             }
         });
     }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_signup);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }*/
 }

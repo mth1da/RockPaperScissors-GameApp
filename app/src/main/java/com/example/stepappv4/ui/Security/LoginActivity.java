@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.example.stepappv4.MainActivity;
 import com.example.stepappv4.DatabaseHelper;
 import com.example.stepappv4.databinding.ActivityLoginBinding;
+import com.example.stepappv4.ui.Game.Game_01_Matching;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -52,6 +53,14 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        binding.homeRedirectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, Game_01_Matching.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void moveToMainActivity() {
@@ -80,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         // login and save session
         //User user = new User(12,"Ankit");
         SessionManager sessionManagement = new SessionManager(LoginActivity.this);
-        sessionManagement.saveSession();
+        //sessionManagement.saveSession();
 
         //2. step
         moveToMainActivity();
