@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
 
 import androidx.core.app.ActivityCompat;
 
@@ -18,6 +19,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
+
+// The base of this code was created by following the video series: https://www.youtube.com/watch?v=SZyuFLb_wWU
+// The code can be found on github: https://github.com/qaifikhan/AndroidTutorials/tree/master/BluetoothChatApp
+// Afterwards it was modified by us to fit our needs.
 
 public class ChatUtils {
     private Context context;
@@ -44,9 +49,6 @@ public class ChatUtils {
 
         state = STATE_NONE;
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        //start();
-
-        //setState(STATE_LISTEN);
     }
 
     public int getState() {
@@ -298,6 +300,7 @@ public class ChatUtils {
     private void connectionLost() {
         Message message = handler.obtainMessage(Game_01_Matching.MESSAGE_TOAST);
         Bundle bundle = new Bundle();
+        // If you change this string, change it in the handler in Game_01_Matchig.java too!
         bundle.putString(Game_01_Matching.TOAST, "Connection Lost");
         message.setData(bundle);
         handler.sendMessage(message);

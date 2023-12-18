@@ -38,6 +38,10 @@ import com.example.stepappv4.R;
 
 import java.util.Set;
 
+// The base of this code was created by following the video series: https://www.youtube.com/watch?v=SZyuFLb_wWU
+// The code can be found on github: https://github.com/qaifikhan/AndroidTutorials/tree/master/BluetoothChatApp
+// Afterwards it was modified by us to fit our needs.
+
 public class DeviceListActivity extends AppCompatActivity {
     private ListView listPairedDevices, listAvailableDevices;
     private ArrayAdapter<String> adapterPairedDevices, adapterAvailableDevices;

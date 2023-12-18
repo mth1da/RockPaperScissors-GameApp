@@ -16,6 +16,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -62,17 +64,28 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.stepappv4.R;
+import com.example.stepappv4.ui.Home.HomeFragment;
+import com.example.stepappv4.ui.Home.StepCounterListener;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-//public class Game_01_Matching extends Fragment {
+// The base of this code was created by following the video series: https://www.youtube.com/watch?v=SZyuFLb_wWU
+// The code can be found on github: https://github.com/qaifikhan/AndroidTutorials/tree/master/BluetoothChatApp
+// Afterwards it was modified by us to fit our needs.
+
+// The GPS integration used the guidelines from ChatGPT, and
+// https://www.tabnine.com/code/java/methods/com.google.gwt.maps.client.geocode.Geocoder/getFromLocation
+
 public class Game_01_Matching extends AppCompatActivity {
     private Context context;
     private BluetoothAdapter bluetoothAdapter;
     private LocationManager locationManager;
     private LocationListener locationListener;
+    private SensorManager stepManager;
+    private Sensor accSensor;
+    private StepCounterListener stepListener;
     private ChatUtils chatUtils;
     private final int BLUETOOTH_PERMISSION_REQUEST = 100;
     private final int LOCATION_PERMISSION_REQUEST = 101;
@@ -106,6 +119,7 @@ public class Game_01_Matching extends AppCompatActivity {
     private Button btnReplay;
     private TableLayout table;
     private TextView position;
+    private TextView steps;
 
     private final ActivityResultLauncher<Intent> deviceListLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -160,7 +174,6 @@ public class Game_01_Matching extends AppCompatActivity {
                     byte[] buffer = (byte[]) message.obj;
                     String inputBuffer = new String(buffer, 0, message.arg1);
                     adapterMainChat.add(connectedDevice + ": " + inputBuffer);
-                    //Toast.makeText(context, inputBuffer, Toast.LENGTH_SHORT).show();
                     oppText.setText(inputBuffer);
                     //updateOutcome(myText, oppText);
                     break;
@@ -170,6 +183,10 @@ public class Game_01_Matching extends AppCompatActivity {
                     break;
                 case MESSAGE_TOAST:
                     Toast.makeText(context, message.getData().getString(TOAST), Toast.LENGTH_SHORT).show();
+                    if (message.getData().getString(TOAST) == "Connection Lost") {
+                        hideActionBtns();
+                        btnReplay.setVisibility(View.GONE);
+                    }
                     break;
             }
             return false;
@@ -234,7 +251,7 @@ public class Game_01_Matching extends AppCompatActivity {
         decision.setVisibility(View.VISIBLE);
     }
 
-    private void hideActionBtns() {
+    public void hideActionBtns() {
         btnRock.setVisibility(View.GONE);
         btnPaper.setVisibility(View.GONE);
         btnScissors.setVisibility(View.GONE);
@@ -263,10 +280,24 @@ public class Game_01_Matching extends AppCompatActivity {
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        stepManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        accSensor = stepManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+        stepListener = new StepCounterListener(null, null, null, this);
+
 
         initializeText();
         chatUtils = new ChatUtils(context, handler);
         hideActionBtns();
+    }
+
+    public void shakePhone() {
+        Integer counter = 0;
+        Toast.makeText(context, "Shaken, not stirred!", Toast.LENGTH_SHORT).show();
+        updateOutcome(myText, oppText);
+        showResult();
+        btnReplay.setVisibility(View.VISIBLE);
+        btnCompare.setVisibility(View.GONE);
+        stepManager.unregisterListener(stepListener);
     }
 
     private void initializeText() {
@@ -305,6 +336,9 @@ public class Game_01_Matching extends AppCompatActivity {
                 chatUtils.write(message.getBytes());
                 showCompBtn();
                 hidePlayBtns();
+                if (accSensor != null) {
+                    stepManager.registerListener(stepListener, accSensor, SensorManager.SENSOR_DELAY_NORMAL);
+                }
             }
         });
 
@@ -316,6 +350,9 @@ public class Game_01_Matching extends AppCompatActivity {
                 chatUtils.write(message.getBytes());
                 showCompBtn();
                 hidePlayBtns();
+                if (accSensor != null) {
+                    stepManager.registerListener(stepListener, accSensor, SensorManager.SENSOR_DELAY_NORMAL);
+                }
             }
         });
 
@@ -327,6 +364,9 @@ public class Game_01_Matching extends AppCompatActivity {
                 chatUtils.write(message.getBytes());
                 showCompBtn();
                 hidePlayBtns();
+                if (accSensor != null) {
+                    stepManager.registerListener(stepListener, accSensor, SensorManager.SENSOR_DELAY_NORMAL);
+                }
             }
         });
 
@@ -358,6 +398,7 @@ public class Game_01_Matching extends AppCompatActivity {
                 table.setVisibility(View.GONE);
                 showPlayBtns();
                 btnReplay.setVisibility(View.GONE);
+                stepManager.unregisterListener(stepListener);
             }
         });
     }
@@ -385,6 +426,7 @@ public class Game_01_Matching extends AppCompatActivity {
                     if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                         Toast.makeText(context, "Contacting Satellites...", Toast.LENGTH_SHORT).show();
                         locationListener = new LocationListener() {
+                            boolean hasDisplayedCoords = false;
                             @Override
                             public void onLocationChanged(@NonNull Location location) {
                                 double latitude = location.getLatitude();
@@ -403,10 +445,13 @@ public class Game_01_Matching extends AppCompatActivity {
                                     throw new RuntimeException(e);
                                 }
                                 position.setText(result);
-                                Toast.makeText(context, "Lat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_SHORT).show();
+                                if (!hasDisplayedCoords) {
+                                    Toast.makeText(context, "Lat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_SHORT).show();
+                                    hasDisplayedCoords = true;
+                                }
                             }
                         };
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 1, locationListener);
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 5, locationListener);
                         if (bluetoothAdapter.getScanMode() == BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
                             Intent intent = new Intent(Game_01_Matching.this, DeviceListActivity.class);
                             deviceListLauncher.launch(intent);
@@ -425,6 +470,9 @@ public class Game_01_Matching extends AppCompatActivity {
         }
         if (locationManager != null) {
             locationManager.removeUpdates(locationListener);
+        }
+        if (stepManager != null && stepListener != null) {
+            stepManager.unregisterListener(stepListener);
         }
     }
 
