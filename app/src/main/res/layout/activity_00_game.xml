@@ -29,11 +29,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
+        android:backgroundTint="#DEEBF7"
+        android:fontFamily="@font/comic_neue"
         android:text="Login"
+        android:textAlignment="center"
+        android:textColor="#843C0C"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/game_init"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.166" />
+        app:layout_constraintVertical_bias="0.1"
+        app:strokeColor="#843C0C"
+        app:strokeWidth="2dp"/>
 
     <Button
         android:id="@+id/rematch_init"
@@ -59,7 +67,8 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/history_button"

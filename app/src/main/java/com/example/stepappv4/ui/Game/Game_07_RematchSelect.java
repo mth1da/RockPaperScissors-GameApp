@@ -5,12 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.example.stepappv4.MainActivity;
 import com.example.stepappv4.R;
+import com.example.stepappv4.ui.Home.HomeFragment;
+import com.example.stepappv4.ui.Home.HomeViewModel;
 
 public class Game_07_RematchSelect extends Fragment implements View.OnClickListener {
 
@@ -31,6 +35,5 @@ public class Game_07_RematchSelect extends Fragment implements View.OnClickListe
         if (view.getId() == R.id.rematchselect_home_button) {
             Navigation.findNavController(view).navigate(R.id.action_historyFragment_to_home);
         }
-
     }
 }

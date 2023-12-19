@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.stepappv4.MainActivity;
 import com.example.stepappv4.databinding.ActivityLoginBinding;
 import com.example.stepappv4.databinding.ActivitySignupBinding;
 import com.example.stepappv4.R;
@@ -35,14 +36,14 @@ public class SignupActivity extends AppCompatActivity {
                 String password = binding.signupPassword.getText().toString();
                 String confirmPassword = binding.signupConfirm.getText().toString();
                 if(email.equals("")||password.equals("")||confirmPassword.equals(""))
-                    Toast.makeText(SignupActivity.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this, "All fields are mandatory!", Toast.LENGTH_SHORT).show();
                 else{
                     if(password.equals(confirmPassword)){
                         Boolean checkUserEmail = databaseHelper.checkEmail(email);
                         if(checkUserEmail == false){
                             Boolean insert = databaseHelper.insertData(email, password);
                             if(insert == true){
-                                Toast.makeText(SignupActivity.this, "Signup Successfully!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignupActivity.this, "Signup Successful!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
                                 startActivity(intent);
                             }else{
@@ -70,7 +71,7 @@ public class SignupActivity extends AppCompatActivity {
         binding.toHomeRedirectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignupActivity.this, Game_01_Matching.class);
+                Intent intent = new Intent(SignupActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
