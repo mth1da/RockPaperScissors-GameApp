@@ -6,19 +6,21 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/footsteps_silhouette_variant_svgrepo_com"
-            android:title="@string/menu_steps" />
+            android:fontFamily="@font/comic_neue"
+            android:icon="@drawable/baseline_home_24"
+            android:title="Home" />
+
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/baseline_stacked_bar_chart_24"
-            android:title="Hourly Report" />
+            android:id="@+id/nav_stats"
+            android:icon="@drawable/baseline_query_stats_24"
+            android:title="Stats" />
         <item
-            android:id="@+id/nav_day"
+            android:id="@+id/nav_history"
             android:icon="@drawable/baseline_stacked_bar_chart_24"
-            android:title="Daily Report" />
+            android:title="Match History" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/baseline_person_pin_24"
-            android:title="@string/menu_profile" />
+            android:title="Profile" />
     </group>
 </menu>

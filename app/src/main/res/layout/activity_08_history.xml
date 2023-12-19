@@ -8,9 +8,10 @@
 
     <TableLayout
         android:id="@+id/history_table"
-        android:layout_width="397dp"
-        android:layout_height="401dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:stretchColumns="1"
+        android:layout_marginBottom="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,147 +20,294 @@
         <TableRow>
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="#" />
 
             <TextView
-                android:padding="3dip"
-                android:text="Opponent" />
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Opp." />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="Outcome" />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="Date/Time" />
 
             <TextView
-                android:padding="3dip"
-                android:text="Position" />
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Pos." />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:text="Rematch" />
         </TableRow>
 
         <TableRow>
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="1" />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="X" />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="WIN" />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="31/12/2023 12:00" />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="CH" />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="No" />
         </TableRow>
 
         <TableRow>
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="2" />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="Y" />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="LOSS" />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="31/12/2023 12:05" />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="FR" />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="Yes" />
         </TableRow>
 
         <TableRow>
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="3" />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="Z" />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="DRAW" />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="31/12/2023 12:10" />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="DE" />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="No" />
         </TableRow>
 
         <TableRow>
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="..." />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="..." />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="..." />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="..." />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="..." />
 
             <TextView
-                android:padding="3dip"
+                android:padding="3dp"
+                android:fontFamily="@font/comic_neue"
+                android:gravity="center"
+                android:textColor="#843C0C"
+                android:textSize="18sp"
                 android:text="..." />
         </TableRow>
     </TableLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded"
+        android:fontFamily="@font/comic_neue"
+        android:padding="8dp"
+        android:text="[not implemented]"
+        android:textAlignment="center"
+        android:textColor="#843C0C"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/history_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:background="@drawable/bg_rounded"
+        android:fontFamily="@font/comic_neue"
+        android:padding="8dp"
         android:text="Match History"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="#843C0C"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -168,8 +316,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
+        android:backgroundTint="#DEEBF7"
+        android:fontFamily="@font/comic_neue"
         android:text="Home"
+        android:textAlignment="center"
+        android:textColor="#843C0C"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="#843C0C"
+        app:strokeWidth="2dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

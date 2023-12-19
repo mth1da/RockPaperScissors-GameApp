@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#9DC3E6"
     tools:context=".ui.Security.LoginActivity">
 
     <ScrollView
@@ -20,7 +21,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="601dp"
                 android:layout_marginTop="150dp"
                 android:orientation="vertical"
                 android:padding="20dp">
@@ -29,55 +30,85 @@
                     android:id="@+id/login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_rounded"
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="@font/comic_neue"
                     android:padding="8dp"
                     android:text="Log In"
-                    android:textColor="@color/md_theme_light_onPrimaryContainer"
-                    android:textSize="24sp" />
+                    android:textAlignment="center"
+                    android:textColor="#843C0C"
+                    android:textSize="28sp" />
 
                 <EditText
                     android:id="@+id/login_email"
-                    android:layout_width="350dp"
+                    android:layout_width="340dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="30dp"
                     android:background="@drawable/border"
-                    android:drawableLeft="@drawable/baseline_email_24"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/comic_neue"
                     android:drawablePadding="8dp"
-                    android:hint="Email"
-                    android:padding="8dp" />
+                    android:padding="8dp"
+                    android:drawableLeft="@drawable/baseline_email_24"
+                    android:hint="E-Mail"
+                    android:textColor="#843C0C"
+                    android:drawableTint="#843C0C"
+                    android:textCursorDrawable="@null"
+                    android:textColorHint="#9DC3E6"/>
 
                 <EditText
                     android:id="@+id/login_password"
-                    android:layout_width="350dp"
+                    android:layout_width="340dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
                     android:background="@drawable/border"
-                    android:drawableLeft="@drawable/baseline_lock_24"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/comic_neue"
                     android:drawablePadding="8dp"
+                    android:padding="8dp"
                     android:hint="Password"
                     android:inputType="textPassword"
-                    android:padding="8dp" />
+                    android:textColor="#843C0C"
+                    android:layout_marginTop="20dp"
+                    android:drawableLeft="@drawable/baseline_lock_24"
+                    android:drawableTint="#843C0C"
+                    android:textCursorDrawable="@null"
+                    android:textColorHint="#9DC3E6"/>
 
                 <Button
                     android:id="@+id/login_button"
-                    android:layout_width="350dp"
-                    android:layout_height="70dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#DEEBF7"
+                    android:drawableRight="@drawable/baseline_check_24"
+                    android:drawableTint="#9DC3E6"
+                    android:fontFamily="@font/comic_neue"
                     android:text="Login"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:textColor="#9DC3E6"
+                    android:padding="8dp"
+                    android:layout_marginTop="30dp"
                     android:textSize="18sp"
+                    app:strokeColor="#843C0C"
+                    app:strokeWidth="2dp"
                     app:cornerRadius="30dp" />
 
                 <Button
                     android:id="@+id/signup_redirect_button"
-                    android:layout_width="350dp"
-                    android:layout_height="70dp"
-                    android:layout_marginTop="15dp"
-                    android:backgroundTint="@color/design_default_color_background"
-                    android:padding="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#DEEBF7"
+                    android:fontFamily="@font/comic_neue"
                     android:text="Not yet registered? Signup"
-                    android:textColor="@color/md_theme_light_onPrimaryContainer"
-                    android:textSize="18sp" />
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:textColor="#9DC3E6"
+                    android:padding="8dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="18sp"
+                    app:strokeColor="#843C0C"
+                    app:strokeWidth="2dp" />
 
                 <Button
                     android:id="@+id/home_redirect_button"
@@ -87,8 +118,10 @@
                     android:fontFamily="@font/comic_neue"
                     android:text="Home"
                     android:textAlignment="center"
+                    android:layout_gravity="center"
                     android:textColor="#843C0C"
                     android:textSize="16sp"
+                    android:layout_marginTop="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

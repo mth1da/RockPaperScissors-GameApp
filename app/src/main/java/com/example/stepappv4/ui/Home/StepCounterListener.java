@@ -9,6 +9,7 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.example.stepappv4.StepAppOpenHelper;
 import com.example.stepappv4.ui.Game.Game_01_Matching;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 
@@ -88,7 +89,7 @@ public class StepCounterListener implements SensorEventListener {
 
 
                 timestampsSeries.add(timestamp);
-                //peakDetection();
+                peakDetection();
 
                 break;
 
@@ -102,7 +103,7 @@ public class StepCounterListener implements SensorEventListener {
 
     }
 
-    /*
+
     private void peakDetection() {
 
         int windowSize = 20;
@@ -140,6 +141,6 @@ public class StepCounterListener implements SensorEventListener {
                 }
             }
         }
-    }*/
+    }
 
 }

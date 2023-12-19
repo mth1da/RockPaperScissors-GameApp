@@ -138,7 +138,7 @@ public class Game_01_Matching extends AppCompatActivity {
                         // Display a Toast message with the received string
                         if (address != null) {
                             //Toast.makeText(this, "Address: " + address, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(context, "Address: " + address, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(context, "Address: " + address, Toast.LENGTH_SHORT).show();
                         }
                         chatUtils.connect(bluetoothAdapter.getRemoteDevice(address));
                     }
@@ -155,6 +155,8 @@ public class Game_01_Matching extends AppCompatActivity {
                             setState("Not Connected");
                             hideActionBtns();
                             btnPlay.setVisibility(View.VISIBLE);
+                            hasChosen.setVisibility(View.GONE);
+                            oppHasChosen.setVisibility(View.GONE);
                             break;
                         case ChatUtils.STATE_LISTEN:
                             setState("Listening For Devices...");
@@ -187,11 +189,11 @@ public class Game_01_Matching extends AppCompatActivity {
                     break;
                 case MESSAGE_DEVICE_NAME:
                     connectedDevice = message.getData().getString(DEVICE_NAME);
-                    Toast.makeText(context, connectedDevice, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Connected To: " + connectedDevice, Toast.LENGTH_SHORT).show();
                     break;
                 case MESSAGE_TOAST:
                     Toast.makeText(context, message.getData().getString(TOAST), Toast.LENGTH_SHORT).show();
-                    if (message.getData().getString(TOAST) == "Connection Lost") {
+                    if (message.getData().getString(TOAST) == "Connection Lost!") {
                         hideActionBtns();
                         btnReplay.setVisibility(View.GONE);
                     }
@@ -337,8 +339,13 @@ public class Game_01_Matching extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Game_01_Matching.this, HomeFragment.class);
+                Intent intent = new Intent(Game_01_Matching.this, MainActivity.class);
                 startActivity(intent);
+                if (chatUtils != null) {
+                    chatUtils.stop();
+                }
+                oppHasChosen.setVisibility(View.GONE);
+                hasChosen.setVisibility(View.GONE);
             }
         });
 
@@ -435,7 +442,7 @@ public class Game_01_Matching extends AppCompatActivity {
 
     private void getPermissions() {
         if (bluetoothAdapter == null) {
-            Toast.makeText(context, "No bluetooth found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "No Bluetooth found!", Toast.LENGTH_SHORT).show();
         } else {
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(Game_01_Matching.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN, Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.ACCESS_FINE_LOCATION}, BLUETOOTH_PERMISSION_REQUEST);
@@ -449,7 +456,7 @@ public class Game_01_Matching extends AppCompatActivity {
                     startActivity(discoveryIntent);
                 } else {
                     if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                        Toast.makeText(context, "Please enable GPS", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Please enable GPS!", Toast.LENGTH_SHORT).show();
                         Intent enableLocationIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                         startActivity(enableLocationIntent);
                     }
@@ -509,6 +516,8 @@ public class Game_01_Matching extends AppCompatActivity {
         if (chatUtils != null) {
             chatUtils.stop();
         }
+        oppHasChosen.setVisibility(View.GONE);
+        hasChosen.setVisibility(View.GONE);
         if (stepManager != null && stepListener != null) {
             stepManager.unregisterListener(stepListener);
         }

@@ -48,8 +48,6 @@ public class GameFragment extends Fragment implements View.OnClickListener{
             Intent intent = new Intent(requireActivity(), Game_01_Matching.class);
             startActivity(intent);
             //Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_matching);
-        } else if (view.getId() == R.id.history_button) {
-            Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_history);
         } else if (view.getId() == R.id.rematch_init) {
             Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_rematching);
         } else if (view.getId() == R.id.login_button) {
