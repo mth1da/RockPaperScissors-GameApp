@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textAlignment="center">
+
+    <TableLayout
+        android:id="@+id/history_table"
+        android:layout_width="397dp"
+        android:layout_height="401dp"
+        android:stretchColumns="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow>
+
+            <TextView
+                android:padding="3dip"
+                android:text="#" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="Opponent" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="Outcome" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="Date/Time" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="Position" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="Rematch" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:padding="3dip"
+                android:text="1" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="X" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="WIN" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="31/12/2023 12:00" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="CH" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="No" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:padding="3dip"
+                android:text="2" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="Y" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="LOSS" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="31/12/2023 12:05" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="FR" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="Yes" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:padding="3dip"
+                android:text="3" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="Z" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="DRAW" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="31/12/2023 12:10" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="DE" />
+
+            <TextView
+                android:padding="3dip"
+                android:text="No" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:padding="3dip"
+                android:text="..." />
+
+            <TextView
+                android:padding="3dip"
+                android:text="..." />
+
+            <TextView
+                android:padding="3dip"
+                android:text="..." />
+
+            <TextView
+                android:padding="3dip"
+                android:text="..." />
+
+            <TextView
+                android:padding="3dip"
+                android:text="..." />
+
+            <TextView
+                android:padding="3dip"
+                android:text="..." />
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/history_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Match History"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/history_home_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:text="Home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

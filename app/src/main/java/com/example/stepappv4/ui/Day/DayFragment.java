@@ -17,7 +17,7 @@ import com.anychart.core.cartesian.series.Column;
 import com.anychart.enums.HoverMode;
 import com.anychart.enums.TooltipPositionMode;
 import com.example.stepappv4.R;
-import com.example.stepappv4.StepAppOpenHelper;
+import com.example.stepappv4.DatabaseHelper;
 import com.example.stepappv4.databinding.FragmentDayBinding;
 
 import java.text.SimpleDateFormat;
@@ -55,7 +55,7 @@ public class DayFragment extends Fragment {
 
     public Cartesian createColumnChart(){
         //***** Read data from SQLiteDatabase *********
-        stepsByDay = StepAppOpenHelper.loadStepsByDay(getContext(), current_time);
+        //stepsByDay = DatabaseHelper.loadStepsByDay(getContext(), current_time);
 
         // Creating a new map that contains days of the week and
         //  number of steps during each day set to 0
